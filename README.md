@@ -1,6 +1,6 @@
 *Instalação local*
 
-Caso queira rodar o Xtudent de forma local, segue as instruções:
+Caso queira rodar o LivrAURA de forma local, segue as instruções:
 
 Clone o repositório
 
