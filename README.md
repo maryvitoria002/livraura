@@ -4,7 +4,9 @@ Caso queira rodar o LivrAURA de forma local, segue as instruções:
 
 Clone o repositório
 
-```git clone https://github.com/maryvitoria002/livraura.git```
+```
+git clone https://github.com/maryvitoria002/livraura.git
+```
 
 Crie um ambiente virtual e instale as dependencias
 
