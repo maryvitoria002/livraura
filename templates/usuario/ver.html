@@ -1,0 +1,20 @@
+<div class="card">
+    <h1>Detalhes do Usuário</h1>
+
+    <div class="linha">
+        <span class="rotulo">Usuario</span>
+        {{ usuario.username|default:"Não informado" }}
+    </div>
+
+    <div class="linha">
+        <span class="rotulo">E-mail</span>
+        {{ usuario.email|default:"Não informado" }}
+    </div>
+
+    <div class="linha">
+        <span class="rotulo">CPF</span>
+        {{ usuario.cpf|default:"Não informado" }}
+    </div>
+    <a href="{% url 'usuario_index' %}">Voltar</a>
+</div>
+
