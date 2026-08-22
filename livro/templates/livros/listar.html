@@ -1,0 +1,20 @@
+<body>
+
+<h1>Lista de livros</h1>
+
+
+{% for livro in livros %}
+
+<p>
+    {{ livro.titulo }}
+</p>
+
+{% empty %}
+
+<p>Nenhum livro cadastrado.</p>
+
+{% endfor %}
+
+
+</body>
+</html>
