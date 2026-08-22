@@ -1,0 +1,20 @@
+<div class="card">
+    <h1>Detalhes do Livro</h1>
+
+    <div class="linha">
+        <span class="rotulo">Livro</span>
+        {{ livro.titulo|default:"Não informado" }}
+    </div>
+
+    <div class="linha">
+        <span class="rotulo">Editora</span>
+        {{ livro.editora|default:"Não informado" }}
+    </div>
+
+    <div class="linha">
+        <span class="rotulo">Categorias</span>
+        {{ livro.categoria.all|join:", "|default:"Não informado" }}
+    </div>
+    <a href="{% url 'livro_index' %}">Voltar</a>
+</div>
+
