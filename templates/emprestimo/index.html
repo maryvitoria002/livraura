@@ -1,0 +1,14 @@
+{% if emprestimos %}
+    <a href="{% url 'emprestimo_criar' %}">Criar Novo</a>
+    {% for emprestimo in emprestimos %}
+        <p>Cliente: {{ emprestimo.cliente }}</p>
+        <p>Bibliotecário: {{ emprestimo.bibliotecario }}</p>
+        <p>Livro: {{ emprestimo.livro }}</p>
+        <a href="{% url 'emprestimo_ver' emprestimo.id %}">Ver</a>
+        <a href="{% url 'emprestimo_renovar' emprestimo.id %}">Renovar</a>
+        <a href="{% url 'emprestimo_editar' emprestimo.id %}">Editar</a>
+        <a href="{% url 'emprestimo_concluir' emprestimo.id %}">Concluir</a>
+    {% endfor %}
+{% else %}
+    <p>Nenhum empréstimo encontrado.</p>
+{% endif %}
