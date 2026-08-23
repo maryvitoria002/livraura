@@ -1,0 +1,12 @@
+<h2>Detalhes do empréstimo</h2>
+
+<p><strong>Livro:</strong> {{ emprestimo.livro }}</p>
+<p><strong>Cliente:</strong> {{ emprestimo.cliente }}</p>
+<p><strong>Bibliotecário:</strong> {{ emprestimo.bibliotecario }}</p>
+<p><strong>Data do empréstimo:</strong> {{ emprestimo.data_emprestimo }}</p>
+<p><strong>Data prevista de devolução:</strong> {{ emprestimo.data_prevista_devolucao }}</p>
+<p><strong>Data de devolução:</strong> {{ emprestimo.data_devolucao|default:"Ainda não devolvido" }}</p>
+<p><strong>Status:</strong> {{ emprestimo.status }}</p>
+<p><strong>Renovado:</strong> {{ emprestimo.renovado|yesno:"Sim,Não" }}</p>
+
+<a href="{% url 'emprestimo_index' %}">Voltar para a lista</a>

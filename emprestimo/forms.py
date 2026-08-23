@@ -5,10 +5,9 @@ from .models import Emprestimo
 class CriarEmprestimoForm(ModelForm):
     class Meta:
         model = Emprestimo
-        fields = ['livro', 'cliente', 'data_emprestimo', 'data_devolucao', 'bibliotecario']
+        fields = ['livro', 'cliente', 'bibliotecario', 'data_emprestimo','data_prevista_devolucao','data_devolucao']
 
 class EditarEmprestimoForm(ModelForm):
     class Meta:
         model = Emprestimo
-        fields = ['livro', 'cliente', 'data_emprestimo', 'data_devolucao', 'bibliotecario']
-
+        fields = ['livro', 'cliente', 'bibliotecario', 'data_emprestimo','data_prevista_devolucao','data_devolucao']
