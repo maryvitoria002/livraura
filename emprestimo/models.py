@@ -1,13 +1,12 @@
 # Create your models here.
 from django.db import models
-from django.contrib.auth.models import User
+from usuario.models import Usuario
 from livro.models import Livro
 
 class Emprestimo(models.Model):
-    livro = models.ForeignKey(Livro, on_delete=models.CASCADE)
-    cliente = models.ForeignKey(User, on_delete=models.CASCADE, related_name='emprestimos_como_cliente')
-    bibliotecario = models.ForeignKey(User, on_delete=models.CASCADE, related_name='emprestimos_como_bibliotecario')
-
+    livro = models.ForeignKey(Livro, on_delete=models.PROTECT)
+    cliente = models.ForeignKey(Usuario, on_delete=models.PROTECT, related_name='emprestimos_como_cliente')
+    bibliotecario = models.ForeignKey(Usuario, on_delete=models.PROTECT, related_name='emprestimos_como_bibliotecario')
     data_emprestimo = models.DateField()
     data_prevista_devolucao = models.DateField()
     data_devolucao = models.DateField(null=True, blank=True)
