@@ -4,9 +4,9 @@ from .forms import CriarUsuarioForm, EditarUsuarioForm
 
 # Create your views here.
 
-def index(request):
+def listar(request):
     usuarios = Usuario.objects.all()
-    return render(request, 'usuario/index.html', {'usuarios': usuarios})
+    return render(request, 'usuario/listar.html', {'usuarios': usuarios})
 
 # Função create
 def criar(request):
@@ -14,7 +14,7 @@ def criar(request):
         form = CriarUsuarioForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('usuario_index')
+            return redirect('usuario_listar')
     else:
         form = CriarUsuarioForm()
     context = {
@@ -29,7 +29,7 @@ def editar(request, usuario_id):
         form = EditarUsuarioForm(request.POST, instance=usuario)
         if form.is_valid():
             form.save()
-            return redirect('usuario_index')
+            return redirect('usuario_listar')
     else:
         form = EditarUsuarioForm(instance=usuario)
     context = {
@@ -41,10 +41,10 @@ def editar(request, usuario_id):
 def deletar(request, usuario_id):
     usuario = Usuario.objects.get(id=usuario_id)
     usuario.delete()
-    return redirect('usuario_index')
+    return redirect('usuario_listar')
 
 # Função read
-def ver(request, usuario_id): 
+def detalhar(request, usuario_id):
     usuario = Usuario.objects.get(id=usuario_id)
     context = {
         'usuario': usuario,

@@ -4,8 +4,8 @@
     {% for livro in livros %}
         <li>{{ livro.titulo }} - {{ livro.editora }} - 
             <a href="{% url 'livro_editar' livro.id %}">Editar</a> 
-            <a href="{% url 'livro_excluir' livro.id %}">Deletar</a>
-            <a href="{% url 'livro_ver' livro.id %}">Ver</a>
+            <a href="{% url 'livro_deletar' livro.id %}">Deletar</a>
+            <a href="{% url 'livro_detalhar' livro.id %}">Detalhar</a>
         </li>  
     {% endfor %}
 </ul>

@@ -5,7 +5,7 @@
         <li>{{ usuario.username }} - {{ usuario.email }} - 
             <a href="{% url 'usuario_editar' usuario.id %}">Editar</a> 
             <a href="{% url 'usuario_deletar' usuario.id %}">Deletar</a>
-            <a href="{% url 'usuario_ver' usuario.id %}">Ver</a>
+            <a href="{% url 'usuario_detalhar' usuario.id %}">Ver</a>
         </li>  
     {% endfor %}
 </ul>
