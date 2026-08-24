@@ -44,7 +44,7 @@ def deletar(request, usuario_id):
     return redirect('usuario_listar')
 
 # Função read
-def ver(request, usuario_id): 
+def detalhar(request, usuario_id):
     usuario = Usuario.objects.get(id=usuario_id)
     context = {
         'usuario': usuario,

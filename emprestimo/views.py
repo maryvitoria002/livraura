@@ -4,7 +4,7 @@ from .forms import CriarEmprestimoForm, EditarEmprestimoForm
 from django.contrib import messages #Para as mensagem de erro e sucesso
 from datetime import timedelta #Para a função renovar
 from django.shortcuts import get_object_or_404
-from django.http import HttpResponseNotFound
+from django.http import HttpResponseNotFound 
 
 # Create your views here.
 
@@ -44,7 +44,7 @@ def editar(request, emprestimo_id):
     return render(request, 'emprestimo/editar.html', context)
 
 # Função detalhar
-def ver(request, emprestimo_id): 
+def detalhar(request, emprestimo_id):
     emprestimo = get_object_or_404(Emprestimo, id=emprestimo_id)
     return render(request, 'emprestimo/ver.html', {'emprestimo': emprestimo})
 
@@ -57,14 +57,14 @@ def renovar(request, emprestimo_id):
 
     if emprestimo.renovado:
         messages.error(request, "Este empréstimo já foi renovado uma vez.")
-        return redirect('emprestimo_ver', emprestimo_id=emprestimo.id)
+        return redirect('emprestimo_detalhar', emprestimo_id=emprestimo.id)
 
     emprestimo.data_prevista_devolucao += timedelta(days=7)
     emprestimo.renovado = True
     emprestimo.save()
 
     messages.success(request, "Empréstimo renovado com sucesso.")
-    return redirect('emprestimo_ver', emprestimo_id=emprestimo.id)
+    return redirect('emprestimo_detalhar', emprestimo_id=emprestimo.id)
 
 # Função concluir (sem apagar, apenas atualizando o status)
 def concluir(request, emprestimo_id):

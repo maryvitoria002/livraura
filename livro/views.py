@@ -31,7 +31,7 @@ def listar(request):
     return render(request, "livro/listar.html", {"livros": livros})
 
 # Atualizar livro
-def atualizar(request, livro_id):
+def editar(request, livro_id):
     livro = get_object_or_404(Livro, id=livro_id)
 
     form = LivroForm(request.POST or None, instance=livro)
@@ -42,16 +42,16 @@ def atualizar(request, livro_id):
 
     return render(request, "livro/editar.html",{"form":form})
 
-# Excluir livro
-def excluir(request, livro_id):
+# Deletar livro
+def deletar(request, livro_id):
     livro = get_object_or_404(Livro, id=livro_id)
     livro.delete()
 
     return redirect("livro_listar")
 
-def ver(request, livro_id): 
+def detalhar(request, livro_id):
     livro = Livro.objects.get(id=livro_id)
     context = {
         'livro': livro,
     }
-    return render(request, 'livro/ver.html', context)
+    return render(request, 'livro/detalhar.html', context)
