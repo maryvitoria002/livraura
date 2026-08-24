@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Excluir Categoria</title>
+</head>
+
+
+<body>
+
+
+<h1>
+    Excluir Categoria
+</h1>
+
+
+<p>
+    Deseja realmente excluir:
+</p>
+
+
+<h3>
+    {{ categoria.nome }}
+</h3>
+
+
+<form method="POST">
+
+    {% csrf_token %}
+
+
+    <button type="submit">
+        Confirmar exclusão
+    </button>
+
+
+</form>
+
+
+<a href="{% url 'listar_categorias' %}">
+    Cancelar
+</a>
+
+
+</body>
+
+</html>
