@@ -1,0 +1,8 @@
+ <form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    
+    <button type="submit"> Cadastrar Editora </button>
+</form>
+
+<a href="{% url 'editora_listar' %}"> Voltar para lista </a>
