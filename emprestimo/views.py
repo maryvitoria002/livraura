@@ -4,15 +4,15 @@ from .forms import CriarEmprestimoForm, EditarEmprestimoForm
 from django.contrib import messages #Para as mensagem de erro e sucesso
 from datetime import timedelta #Para a função renovar
 from django.shortcuts import get_object_or_404
-from django.http import HttpResponseForbidden #Para impedir que o usuário renove empréstimos de outros usuários
+from django.http import HttpResponseNotFound
 
 # Create your views here.
 
 
 # Função listar
-def index(request):
+def listar(request):
     emprestimos = Emprestimo.objects.all()
-    return render(request, 'emprestimo/index.html', {'emprestimos': emprestimos})
+    return render(request, 'emprestimo/listar.html', {'emprestimos': emprestimos})
 
 # Função create
 def criar(request):
@@ -20,7 +20,7 @@ def criar(request):
         form = CriarEmprestimoForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('emprestimo_index')
+            return redirect('emprestimo_listar')
     else:
         form = CriarEmprestimoForm()
     context = {
@@ -35,7 +35,7 @@ def editar(request, emprestimo_id):
         form = EditarEmprestimoForm(request.POST, instance=emprestimo)
         if form.is_valid():
             form.save()
-            return redirect('emprestimo_index')
+            return redirect('emprestimo_listar')
     else:
         form = EditarEmprestimoForm(instance=emprestimo)
     context = {
@@ -53,7 +53,7 @@ def renovar(request, emprestimo_id):
     emprestimo = get_object_or_404(Emprestimo, id=emprestimo_id)
 
     if emprestimo.cliente != request.user:
-        return HttpResponseForbidden("Você só pode renovar o seu próprio empréstimo.")
+        return HttpResponseNotFound("Emprestimo nao encontrado.")
 
     if emprestimo.renovado:
         messages.error(request, "Este empréstimo já foi renovado uma vez.")
@@ -72,4 +72,4 @@ def concluir(request, emprestimo_id):
     emprestimo.status = 'devolvido'
     emprestimo.save()
     messages.success(request, "Empréstimo concluído com sucesso.")
-    return redirect('emprestimo_index')
+    return redirect('emprestimo_listar')

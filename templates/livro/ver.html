@@ -15,6 +15,6 @@
         <span class="rotulo">Categorias</span>
         {{ livro.categoria.all|join:", "|default:"Não informado" }}
     </div>
-    <a href="{% url 'livro_index' %}">Voltar</a>
+    <a href="{% url 'livro_listar' %}">Voltar</a>
 </div>
 
