@@ -23,4 +23,6 @@ urlpatterns = [
     path("livro/", include("livro.urls")),
     path("emprestimo/", include("emprestimo.urls")),
     path("editora/", include("editora.urls")),
+    path("categoria/", include("categoria.urls")),
+    path("autor/", include("autor.urls")),
 ]
