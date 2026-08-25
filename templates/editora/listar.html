@@ -1,0 +1,12 @@
+<a href="{% url 'editora_criar' %}">Cadastrar Editora</a>
+
+{% for editora in editoras %}
+    <li>
+        {{ editora.nome }}
+        <a href="{% url 'editora_editar' editora.id %}">Editar</a>
+        <a href="{% url 'editora_deletar' editora.id %}">Excluir</a>
+        <a href="{% url 'editora_detalhar' editora.id %}">Detalhar</a>
+    </li>
+{% empty %}
+    <li>Nenhuma editora cadastrada.</li>
+{% endfor %}

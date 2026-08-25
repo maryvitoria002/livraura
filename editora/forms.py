@@ -2,7 +2,7 @@ from django import forms
 from .models import Editora
 
 
-class LivroForm(forms.ModelForm):
+class EditoraForm(forms.ModelForm):
     class Meta:
         model = Editora
 
