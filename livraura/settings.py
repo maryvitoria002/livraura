@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'emprestimo',
     'editora',
     'categoria',
+    'autor',
 ]
 
 MIDDLEWARE = [
