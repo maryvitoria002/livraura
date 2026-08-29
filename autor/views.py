@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Autor
 from .forms import AutorForm
+from django.contrib.auth.decorators import login_required
 
 def criar(request):
     form = AutorForm(request.POST or None)
