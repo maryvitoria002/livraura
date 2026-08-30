@@ -58,29 +58,3 @@ def detalhar(request, usuario_id):
         'usuario': usuario,
     }
     return render(request, 'usuario/detalhar.html', context)
-
-#Função login
-def login_view(request):
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            # Redireciona para a página de destino após o login bem-sucedido
-            next = request.GET.get('next') or "usuario_listar"
-            return redirect(next)
-        else:
-            error_message = 'Nome de usuário ou senha inválidos.'
-            # Caso de erro, renderiza o formulário de login novamente com a mensagem de erro
-            form = AuthenticationForm(data=request.POST)
-            return render(request, 'usuario/login.html', {'error_message': error_message, 'form': form})
-
-    else:
-        form = AuthenticationForm()
-        return render(request, 'usuario/login.html', {'form': form})
-
-@login_required
-def logout_view(request):
-    logout(request)
-    return redirect('usuario_login')
