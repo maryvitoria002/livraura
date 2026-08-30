@@ -4,17 +4,20 @@ from .forms import CriarEmprestimoForm, EditarEmprestimoForm
 from django.contrib import messages #Para as mensagem de erro e sucesso
 from datetime import timedelta #Para a função renovar
 from django.shortcuts import get_object_or_404
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseNotFound 
 
 # Create your views here.
 
 
 # Função listar
+@login_required
 def listar(request):
     emprestimos = Emprestimo.objects.all()
     return render(request, 'emprestimo/listar.html', {'emprestimos': emprestimos})
 
 # Função create
+@login_required
 def criar(request):
     if request.method == 'POST':
         form = CriarEmprestimoForm(request.POST)
@@ -29,6 +32,7 @@ def criar(request):
     return render(request, 'emprestimo/criar.html', context)
 
 # Função atualizar
+@login_required
 def editar(request, emprestimo_id):
     emprestimo = Emprestimo.objects.get(id=emprestimo_id)
     if request.method == 'POST':
@@ -44,11 +48,13 @@ def editar(request, emprestimo_id):
     return render(request, 'emprestimo/editar.html', context)
 
 # Função detalhar
+@login_required
 def detalhar(request, emprestimo_id):
     emprestimo = get_object_or_404(Emprestimo, id=emprestimo_id)
     return render(request, 'emprestimo/ver.html', {'emprestimo': emprestimo})
 
 # Função renovar
+@login_required
 def renovar(request, emprestimo_id):
     emprestimo = get_object_or_404(Emprestimo, id=emprestimo_id)
 
@@ -67,6 +73,7 @@ def renovar(request, emprestimo_id):
     return redirect('emprestimo_detalhar', emprestimo_id=emprestimo.id)
 
 # Função concluir (sem apagar, apenas atualizando o status)
+@login_required
 def concluir(request, emprestimo_id):
     emprestimo = Emprestimo.objects.get(id=emprestimo_id)
     emprestimo.status = 'devolvido'
