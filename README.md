@@ -56,8 +56,8 @@ A melhor forma de conhecer o projeto é pela documentação no diretório <a hre
 
 Agradecimento a todas as pessoas que colaboram com código, documentação, design, testes e ideias.
 
-<a href="https://github.com/maryvitoria002/Portal-3AII---PSW/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=maryvitoria002/Portal-3AII---PSW" alt="Contributors" />
+<a href="https://github.com/maryvitoria002/livraura/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=maryvitoria002/livraura" alt="Contributors" />
 </a>
 
 <!-- Lista opcional de destaques:
