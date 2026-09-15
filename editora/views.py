@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Editora
 from .forms import EditoraForm
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 
 @login_required
+@permission_required("editora.add_editora")
 def criar(request):
     form = EditoraForm(request.POST or None)
     
@@ -14,16 +15,19 @@ def criar(request):
     return render(request, "editora/criar.html", {"form": form})
 
 @login_required
+@permission_required("editora.view_editora")
 def listar(request):
     editoras = Editora.objects.all()
     return render(request, "editora/listar.html", {"editoras": editoras})
 
 @login_required
+@permission_required("editora.view_editora")
 def detalhar(request, editora_id):
     editora = get_object_or_404(Editora, id=editora_id)
     return render(request, "editora/detalhar.html", {"editora": editora})
 
 @login_required
+@permission_required("editora.change_editora")
 def editar(request, editora_id):
     editora = get_object_or_404(Editora, id=editora_id)
     form = EditoraForm(request.POST or None, instance=editora)
@@ -35,6 +39,7 @@ def editar(request, editora_id):
     return render(request, "editora/editar.html",{"form":form})
 
 @login_required
+@permission_required("editora.delete_editora")
 def deletar(request, editora_id):
     editora = get_object_or_404(Editora, id=editora_id)
     editora.delete()
