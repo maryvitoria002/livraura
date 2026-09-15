@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required, permission_required
 
 
 @login_required
+@permission_required("livro.add_livro")
 # Criar livro
 def criar(request):
     form = LivroForm(request.POST or None)
@@ -16,6 +17,7 @@ def criar(request):
     return render(request, "livro/criar.html", {"form": form})
 
 @login_required
+@permission_required("livro.view_livro")
 # Listar livro
 def listar(request):
     livros = Livro.objects.all()
@@ -32,6 +34,7 @@ def listar(request):
     return render(request, "livro/listar.html", {"livros": livros})
 
 @login_required
+@permission_required("livro.change_livro")
 # Atualizar livro
 def editar(request, livro_id):
     livro = get_object_or_404(Livro, id=livro_id)
@@ -45,6 +48,7 @@ def editar(request, livro_id):
     return render(request, "livro/editar.html",{"form":form})
 
 @login_required
+@permission_required("livro.delete_livro")
 # Deletar livro
 def deletar(request, livro_id):
     livro = get_object_or_404(Livro, id=livro_id)
@@ -53,6 +57,7 @@ def deletar(request, livro_id):
     return redirect("livro_listar")
 
 @login_required
+@permission_required("livro.view_livro")
 def detalhar(request, livro_id):
     livro = Livro.objects.get(id=livro_id)
     context = {
