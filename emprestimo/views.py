@@ -4,7 +4,7 @@ from .forms import CriarEmprestimoForm, EditarEmprestimoForm
 from django.contrib import messages #Para as mensagem de erro e sucesso
 from datetime import timedelta #Para a função renovar
 from django.shortcuts import get_object_or_404
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from django.http import HttpResponseNotFound 
 
 # Create your views here.
@@ -12,12 +12,14 @@ from django.http import HttpResponseNotFound
 
 # Função listar
 @login_required
+@permission_required("emprestimo.view_emprestimo")
 def listar(request):
     emprestimos = Emprestimo.objects.all()
     return render(request, 'emprestimo/listar.html', {'emprestimos': emprestimos})
 
 # Função create
 @login_required
+@permission_required("emprestimo.add_emprestimo")
 def criar(request):
     if request.method == 'POST':
         form = CriarEmprestimoForm(request.POST)
@@ -33,6 +35,7 @@ def criar(request):
 
 # Função atualizar
 @login_required
+@permission_required("emprestimo.change_emprestimo")
 def editar(request, emprestimo_id):
     emprestimo = Emprestimo.objects.get(id=emprestimo_id)
     if request.method == 'POST':
@@ -49,12 +52,14 @@ def editar(request, emprestimo_id):
 
 # Função detalhar
 @login_required
+@permission_required("emprestimo.view_emprestimo")
 def detalhar(request, emprestimo_id):
     emprestimo = get_object_or_404(Emprestimo, id=emprestimo_id)
     return render(request, 'emprestimo/ver.html', {'emprestimo': emprestimo})
 
 # Função renovar
 @login_required
+@permission_required("emprestimo.change_emprestimo")
 def renovar(request, emprestimo_id):
     emprestimo = get_object_or_404(Emprestimo, id=emprestimo_id)
 
@@ -74,6 +79,7 @@ def renovar(request, emprestimo_id):
 
 # Função concluir (sem apagar, apenas atualizando o status)
 @login_required
+@permission_required("emprestimo.change_emprestimo")
 def concluir(request, emprestimo_id):
     emprestimo = Emprestimo.objects.get(id=emprestimo_id)
     emprestimo.status = 'devolvido'
