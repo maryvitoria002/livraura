@@ -1,9 +1,5 @@
- <form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    
+{% extends "base.html" %}
+{% block title %}Novo livro{% endblock %}
+{% block content %}<div class="app-heading"><span class="title">CATÁLOGO</span><h1>Cadastrar livro</h1><p>Inclua uma nova obra no acervo.</p></div><div class="app-panel"><form method="POST" class="app-form">{% csrf_token %}{{ form.as_p }}<button type="submit" class="btn btn-dark">Cadastrar livro</button> <a href="{% url 'livro_listar' %}" class="btn btn-outline-dark">Voltar</a></form></div>{% endblock %}
     <button type="submit"> Cadastrar Livro </button>
-</form>
-
-<a href="{% url 'livro_listar' %}"> Voltar para lista </a>
 

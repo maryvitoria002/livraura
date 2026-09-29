@@ -1,5 +1,3 @@
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Editar</button>
-</form>
+{% extends "base.html" %}
+{% block title %}Editar usuário{% endblock %}
+{% block content %}<div class="app-heading"><span class="title">USUÁRIOS</span><h1>Editar usuário</h1></div><div class="app-panel"><form method="post" class="app-form">{% csrf_token %}{{ form.as_p }}<button type="submit" class="btn btn-dark">Salvar</button> <a href="{% url 'usuario_listar' %}" class="btn btn-outline-dark">Voltar</a></form></div>{% endblock %}

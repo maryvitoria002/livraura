@@ -1,11 +1,3 @@
-<form method="post">
-    {% csrf_token %}
-    {% if error_message %}
-        <div class="error">
-            <p>{{ error_message }}</p>
-        </div>
-    {% endif %}
-    {{ form.as_p }}
-    <a href="{% url 'usuario_criar' %}">Criar Conta</a>
-    <button type="submit">Login</button>
-</form>
+{% extends "base.html" %}
+{% block title %}Entrar{% endblock %}
+{% block content %}<div class="row justify-content-center"><div class="col-lg-6"><div class="app-heading text-center"><span class="title">LIVRAURA</span><h1>Bem-vindo de volta</h1><p>Entre para acompanhar seus empréstimos.</p></div><div class="app-panel"><form method="post" class="app-form">{% csrf_token %}{% if error_message %}<div class="alert alert-danger">{{ error_message }}</div>{% endif %}{{ form.as_p }}<div class="auth-actions"><button type="submit" class="btn btn-dark">Entrar</button><a href="{% url 'usuario_criar' %}" class="btn btn-outline-dark">Criar conta</a></div></form></div></div></div>{% endblock %}

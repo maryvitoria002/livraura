@@ -6,6 +6,7 @@ from datetime import timedelta #Para a função renovar
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required, permission_required
 from django.http import HttpResponseNotFound 
+from django.utils import timezone
 
 # Create your views here.
 
@@ -14,7 +15,10 @@ from django.http import HttpResponseNotFound
 @login_required
 @permission_required("emprestimo.view_emprestimo")
 def listar(request):
-    emprestimos = Emprestimo.objects.all()
+    if request.user.has_perm('emprestimo.change_emprestimo'):
+        emprestimos = Emprestimo.objects.all()
+    else:
+        emprestimos = Emprestimo.objects.filter(cliente_id=request.user.pk)
     return render(request, 'emprestimo/listar.html', {'emprestimos': emprestimos})
 
 # Função create
@@ -54,19 +58,26 @@ def editar(request, emprestimo_id):
 @login_required
 @permission_required("emprestimo.view_emprestimo")
 def detalhar(request, emprestimo_id):
-    emprestimo = get_object_or_404(Emprestimo, id=emprestimo_id)
-    return render(request, 'emprestimo/ver.html', {'emprestimo': emprestimo})
+    if request.user.has_perm('emprestimo.change_emprestimo'):
+        emprestimos = Emprestimo.objects.all()
+    else:
+        emprestimos = Emprestimo.objects.filter(cliente_id=request.user.pk)
+    emprestimo = get_object_or_404(emprestimos, id=emprestimo_id)
+    return render(request, 'emprestimo/detalhar.html', {'emprestimo': emprestimo})
 
 # Função renovar
 @login_required
-@permission_required("emprestimo.change_emprestimo")
 def renovar(request, emprestimo_id):
     emprestimo = get_object_or_404(Emprestimo, id=emprestimo_id)
 
-    if emprestimo.cliente != request.user:
+    pode_renovar = (
+        emprestimo.cliente_id == request.user.pk
+        or request.user.has_perm('emprestimo.change_emprestimo')
+    )
+    if not pode_renovar:
         return HttpResponseNotFound("Emprestimo nao encontrado.")
 
-    if emprestimo.renovado:
+    if emprestimo.renovado or emprestimo.status == 'devolvido':
         messages.error(request, "Este empréstimo já foi renovado uma vez.")
         return redirect('emprestimo_detalhar', emprestimo_id=emprestimo.id)
 
@@ -81,8 +92,9 @@ def renovar(request, emprestimo_id):
 @login_required
 @permission_required("emprestimo.change_emprestimo")
 def concluir(request, emprestimo_id):
-    emprestimo = Emprestimo.objects.get(id=emprestimo_id)
+    emprestimo = get_object_or_404(Emprestimo, id=emprestimo_id)
     emprestimo.status = 'devolvido'
+    emprestimo.data_devolucao = timezone.localdate()
     emprestimo.save()
     messages.success(request, "Empréstimo concluído com sucesso.")
     return redirect('emprestimo_listar')

@@ -1,5 +1,3 @@
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Criar</button>
-</form>
+{% extends "base.html" %}
+{% block title %}Criar conta{% endblock %}
+{% block content %}<div class="app-heading"><span class="title">LIVRAURA</span><h1>Criar conta</h1><p>Faça parte da comunidade de leitores.</p></div><div class="app-panel"><form method="post" class="app-form">{% csrf_token %}{{ form.as_p }}<button type="submit" class="btn btn-dark">Criar conta</button> <a href="{% url 'usuario_login' %}" class="btn btn-outline-dark">Já tenho uma conta</a></form></div>{% endblock %}

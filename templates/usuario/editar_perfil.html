@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block title %}Editar perfil{% endblock %}
+{% block content %}
+<div class="app-heading"><span class="title">CONTA</span><h1>Editar perfil</h1><p>Atualize somente os seus próprios dados.</p></div>
+<div class="app-panel"><form method="post" class="app-form">{% csrf_token %}{{ form.as_p }}<button type="submit" class="btn btn-dark">Salvar alterações</button> <a href="{% url 'usuario_perfil' %}" class="btn btn-outline-dark">Cancelar</a></form></div>
+{% endblock %}

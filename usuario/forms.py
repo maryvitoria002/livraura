@@ -8,8 +8,17 @@ class CriarUsuarioForm(UserCreationForm):
         model = Usuario
         fields = [ 'cpf', 'username', 'email']
 
+    def save(self, commit=True):
+        usuario = super().save(commit=False)
+        if commit:
+            usuario.save()
+            from django.contrib.auth.models import Group
+            grupo_cliente, _ = Group.objects.get_or_create(name='cliente')
+            usuario.groups.add(grupo_cliente)
+        return usuario
+
 class EditarUsuarioForm(UserChangeForm):
     class Meta(UserChangeForm.Meta):
         model = Usuario
-        fields = ['username',]
+        fields = ['username', 'email', 'cpf']
 

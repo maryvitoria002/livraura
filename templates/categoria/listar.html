@@ -1,12 +1,3 @@
-<a href="{% url 'categoria_criar' %}">Cadastrar Categoria</a>
-
-{% for categoria in categorias %}
-    <li>
-        {{ categoria.nome }}
-        <a href="{% url 'categoria_editar' categoria.id %}">Editar</a>
-        <a href="{% url 'categoria_deletar' categoria.id %}">Excluir</a>
-        <a href="{% url 'categoria_detalhar' categoria.id %}">Detalhar</a>
-    </li>
-{% empty %}
-    <li>Nenhuma categoria cadastrada.</li>
-{% endfor %}
+{% extends "base.html" %}
+{% block title %}Categorias{% endblock %}
+{% block content %}<div class="app-heading d-flex justify-content-between align-items-end"><div><span class="title">ACERVO</span><h1>Categorias</h1><p>Organize o acervo por assunto.</p></div>{% if perms.categoria.add_categoria %}<a href="{% url 'categoria_criar' %}" class="btn btn-dark">Cadastrar categoria</a>{% endif %}</div><div class="table-responsive"><table class="table app-table"><thead><tr><th>Nome</th><th>Descrição</th><th class="text-end">Ações</th></tr></thead><tbody>{% for categoria in categorias %}<tr><td>{{ categoria.nome }}</td><td>{{ categoria.descricao }}</td><td><div class="app-actions justify-content-end"><a href="{% url 'categoria_detalhar' categoria.id %}" class="btn btn-sm btn-outline-dark">Detalhar</a>{% if perms.categoria.change_categoria %}<a href="{% url 'categoria_editar' categoria.id %}" class="btn btn-sm btn-outline-dark">Editar</a>{% endif %}{% if perms.categoria.delete_categoria %}<a href="{% url 'categoria_deletar' categoria.id %}" class="btn btn-sm btn-outline-danger">Excluir</a>{% endif %}</div></td></tr>{% empty %}<tr><td colspan="3"><div class="empty-state">Nenhuma categoria cadastrada.</div></td></tr>{% endfor %}</tbody></table></div>{% endblock %}
