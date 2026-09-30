@@ -3,11 +3,13 @@ from .models import Usuario
 from .forms import CriarUsuarioForm, EditarUsuarioForm
 from  django.contrib.auth  import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 
 # Create your views here.
 
 @login_required
+@permission_required("usuario.view_usuario")
+#Função listar
 def listar(request):
     usuarios = Usuario.objects.all()
     return render(request, 'usuario/listar.html', {'usuarios': usuarios})
@@ -18,7 +20,7 @@ def criar(request):
     if request.method == 'POST':
         form = CriarUsuarioForm(request.POST)
         if form.is_valid():
-            form.save()
+            usuario = form.save()
             return redirect('usuario_listar')
     else:
         form = CriarUsuarioForm()
@@ -28,6 +30,7 @@ def criar(request):
     return render(request, 'usuario/criar.html', context)
 
 @login_required
+@permission_required("usuario.change_usuario")
 # Função update
 def editar(request, usuario_id):
     usuario = Usuario.objects.get(id=usuario_id)
@@ -45,12 +48,14 @@ def editar(request, usuario_id):
 
 # Função delete
 @login_required
+@permission_required("usuario.delete_usuario")
 def deletar(request, usuario_id):
     usuario = Usuario.objects.get(id=usuario_id)
     usuario.delete()
     return redirect('usuario_listar')
 
 @login_required
+@permission_required("usuario.view_usuario")
 # Função read
 def detalhar(request, usuario_id):
     usuario = Usuario.objects.get(id=usuario_id)
