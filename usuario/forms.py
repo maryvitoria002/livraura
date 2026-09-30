@@ -1,3 +1,4 @@
+from django.contrib.auth.models import Group
 from django import forms
 from django.forms import ModelForm
 from .models import Usuario
@@ -12,7 +13,6 @@ class CriarUsuarioForm(UserCreationForm):
         usuario = super().save(commit=False)
         if commit:
             usuario.save()
-            from django.contrib.auth.models import Group
             grupo_cliente, _ = Group.objects.get_or_create(name='cliente')
             usuario.groups.add(grupo_cliente)
         return usuario

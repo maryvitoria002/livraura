@@ -10,6 +10,7 @@ from django.shortcuts import get_object_or_404
 
 @login_required
 @permission_required("usuario.view_usuario")
+#Função listar
 def listar(request):
     usuarios = Usuario.objects.all()
     return render(request, 'usuario/listar.html', {'usuarios': usuarios})
@@ -20,7 +21,7 @@ def criar(request):
     if request.method == 'POST':
         form = CriarUsuarioForm(request.POST)
         if form.is_valid():
-            form.save()
+            usuario = form.save()
             return redirect('usuario_listar')
     else:
         form = CriarUsuarioForm()
