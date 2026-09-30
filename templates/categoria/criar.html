@@ -1,8 +1,3 @@
- <form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    
-    <button type="submit"> Cadastrar Categoria </button>
-</form>
-
-<a href="{% url 'categoria_listar' %}"> Voltar para lista </a>
+{% extends "base.html" %}
+{% block title %}Nova categoria{% endblock %}
+{% block content %}<div class="app-heading"><span class="title">ACERVO</span><h1>Cadastrar categoria</h1></div><div class="app-panel"><form method="POST" class="app-form">{% csrf_token %}{{ form.as_p }}<button type="submit" class="btn btn-dark">Cadastrar categoria</button> <a href="{% url 'categoria_listar' %}" class="btn btn-outline-dark">Voltar</a></form></div>{% endblock %}

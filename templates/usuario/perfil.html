@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Meu perfil{% endblock %}
+{% block content %}
+<div class="app-heading d-flex justify-content-between align-items-end">
+    <div><span class="title">CONTA</span><h1>Meu perfil</h1><p>Consulte e atualize seus dados pessoais.</p></div>
+    <a href="{% url 'usuario_editar_perfil' %}" class="btn btn-dark">Editar perfil</a>
+</div>
+<div class="app-panel">
+    <ul class="detail-list">
+        <li><strong>Usuário</strong>{{ usuario.username|default:"Não informado" }}</li>
+        <li><strong>E-mail</strong>{{ usuario.email|default:"Não informado" }}</li>
+        <li><strong>CPF</strong>{{ usuario.cpf|default:"Não informado" }}</li>
+    </ul>
+</div>
+{% endblock %}

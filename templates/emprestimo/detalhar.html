@@ -1,12 +1,3 @@
-<h2>Detalhes do empréstimo</h2>
-
-<p><strong>Livro:</strong> {{ emprestimo.livro }}</p>
-<p><strong>Cliente:</strong> {{ emprestimo.cliente }}</p>
-<p><strong>Bibliotecário:</strong> {{ emprestimo.bibliotecario }}</p>
-<p><strong>Data do empréstimo:</strong> {{ emprestimo.data_emprestimo }}</p>
-<p><strong>Data prevista de devolução:</strong> {{ emprestimo.data_prevista_devolucao }}</p>
-<p><strong>Data de devolução:</strong> {{ emprestimo.data_devolucao|default:"Ainda não devolvido" }}</p>
-<p><strong>Status:</strong> {{ emprestimo.status }}</p>
-<p><strong>Renovado:</strong> {{ emprestimo.renovado|yesno:"Sim,Não" }}</p>
-
-<a href="{% url 'emprestimo_listar' %}">Voltar para a lista</a>
+{% extends "base.html" %}
+{% block title %}Empréstimo{% endblock %}
+{% block content %}<div class="app-heading"><span class="title">CIRCULAÇÃO</span><h1>Detalhes do empréstimo</h1></div><div class="app-panel"><ul class="detail-list"><li><strong>Livro</strong>{{ emprestimo.livro }}</li><li><strong>Cliente</strong>{{ emprestimo.cliente }}</li><li><strong>Bibliotecário</strong>{{ emprestimo.bibliotecario }}</li><li><strong>Data do empréstimo</strong>{{ emprestimo.data_emprestimo }}</li><li><strong>Devolução prevista</strong>{{ emprestimo.data_prevista_devolucao }}</li><li><strong>Data de devolução</strong>{{ emprestimo.data_devolucao|default:"Ainda não devolvido" }}</li><li><strong>Status</strong>{{ emprestimo.status }}</li><li><strong>Renovado</strong>{{ emprestimo.renovado|yesno:"Sim,Não" }}</li></ul><a href="{% url 'emprestimo_listar' %}" class="btn btn-outline-dark mt-4">Voltar para a lista</a></div>{% endblock %}

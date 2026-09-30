@@ -1,14 +1,3 @@
-{% if emprestimos %}
-    <a href="{% url 'emprestimo_criar' %}">Criar Novo</a>
-    {% for emprestimo in emprestimos %}
-        <p>Cliente: {{ emprestimo.cliente }}</p>
-        <p>Bibliotecário: {{ emprestimo.bibliotecario }}</p>
-        <p>Livro: {{ emprestimo.livro }}</p>
-        <a href="{% url 'emprestimo_detalhar' emprestimo.id %}">Detalhar</a>
-        <a href="{% url 'emprestimo_renovar' emprestimo.id %}">Renovar</a>
-        <a href="{% url 'emprestimo_editar' emprestimo.id %}">Editar</a>
-        <a href="{% url 'emprestimo_concluir' emprestimo.id %}">Concluir</a>
-    {% endfor %}
-{% else %}
-    <p>Nenhum empréstimo encontrado.</p>
-{% endif %}
+{% extends "base.html" %}
+{% block title %}Empréstimos{% endblock %}
+{% block content %}<div class="app-heading d-flex justify-content-between align-items-end"><div><span class="title">CIRCULAÇÃO</span><h1>Empréstimos</h1><p>Acompanhe os livros que estão em circulação.</p></div>{% if perms.emprestimo.add_emprestimo %}<a href="{% url 'emprestimo_criar' %}" class="btn btn-dark">Novo empréstimo</a>{% endif %}</div>{% if emprestimos %}<div class="table-responsive"><table class="table app-table"><thead><tr><th>Livro</th><th>Cliente</th><th>Status</th><th class="text-end">Ações</th></tr></thead><tbody>{% for emprestimo in emprestimos %}<tr><td>{{ emprestimo.livro }}</td><td>{{ emprestimo.cliente }}</td><td>{{ emprestimo.status }}</td><td><div class="app-actions justify-content-end"><a href="{% url 'emprestimo_detalhar' emprestimo.id %}" class="btn btn-sm btn-outline-dark">Detalhar</a>{% if not emprestimo.renovado and emprestimo.status != 'devolvido' and user == emprestimo.cliente or perms.emprestimo.change_emprestimo and not emprestimo.renovado and emprestimo.status != 'devolvido' %}<a href="{% url 'emprestimo_renovar' emprestimo.id %}" class="btn btn-sm btn-outline-dark">Renovar</a>{% endif %}{% if perms.emprestimo.change_emprestimo %}<a href="{% url 'emprestimo_editar' emprestimo.id %}" class="btn btn-sm btn-outline-dark">Editar</a><a href="{% url 'emprestimo_concluir' emprestimo.id %}" class="btn btn-sm btn-outline-dark">Concluir</a>{% endif %}</div></td></tr>{% endfor %}</tbody></table></div>{% else %}<div class="empty-state">Nenhum empréstimo encontrado.</div>{% endif %}{% endblock %}

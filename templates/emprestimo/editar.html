@@ -1,8 +1,3 @@
- <form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    
-    <button type="submit"> Salvar </button>
-</form>
-
-<a href="{% url 'emprestimo_listar' %}"> Voltar para lista </a>
+{% extends "base.html" %}
+{% block title %}Editar empréstimo{% endblock %}
+{% block content %}<div class="app-heading"><span class="title">CIRCULAÇÃO</span><h1>Editar empréstimo</h1></div><div class="app-panel"><form method="POST" class="app-form">{% csrf_token %}{{ form.as_p }}<button type="submit" class="btn btn-dark">Salvar</button> <a href="{% url 'emprestimo_listar' %}" class="btn btn-outline-dark">Voltar</a></form></div>{% endblock %}

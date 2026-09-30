@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-6n=fczo%73q=o%v_b6h5b**&takrf0^=in&#difjxmeij=uq+5
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'testserver']
 
 
 # Application definition
@@ -67,6 +67,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'usuario.context_processors.usuario_context',
             ],
         },
     },
@@ -121,6 +122,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.1/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [BASE_DIR / 'static']
 
 
 # Email
@@ -134,5 +136,5 @@ MAILERS = {
 
 # Configurações de login e logout
 LOGIN_URL = '/usuario/login/'
-LOGIN_REDIRECT_URL = '/usuario/listar/'
+LOGIN_REDIRECT_URL = '/livro/'
 LOGOUT_REDIRECT_URL = '/usuario/login/'

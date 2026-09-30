@@ -1,4 +1,3 @@
-<h2>{{ autor.nome }}</h2>
-<p><strong>Nome:</strong> {{ autor.nome }}</p>
-<p><strong>Email:</strong> {{ autor.email }}</p>
-<a href="{% url 'autor_listar' %}">Voltar para a lista</a>
+{% extends "base.html" %}
+{% block title %}Autor{% endblock %}
+{% block content %}<div class="app-heading"><span class="title">DETALHES</span><h1>{{ autor.nome }}</h1></div><div class="app-panel"><ul class="detail-list"><li><strong>Nome</strong>{{ autor.nome }}</li><li><strong>Email</strong>{{ autor.email }}</li></ul><a href="{% url 'autor_listar' %}" class="btn btn-outline-dark mt-4">Voltar para a lista</a></div>{% endblock %}

@@ -1,20 +1,5 @@
-<div class="card">
-    <h1>Detalhes do Usuário</h1>
-
-    <div class="linha">
+{% extends "base.html" %}
+{% block title %}Usuário{% endblock %}
+{% block content %}<div class="app-heading"><span class="title">USUÁRIOS</span><h1>Detalhes do usuário</h1></div><div class="app-panel"><ul class="detail-list"><li><strong>Usuário</strong>{{ usuario.username|default:"Não informado" }}</li><li><strong>E-mail</strong>{{ usuario.email|default:"Não informado" }}</li><li><strong>CPF</strong>{{ usuario.cpf|default:"Não informado" }}</li></ul><a href="{% url 'usuario_listar' %}" class="btn btn-outline-dark mt-4">Voltar</a></div>{% endblock %}
         <span class="rotulo">Usuario</span>
-        {{ usuario.username|default:"Não informado" }}
-    </div>
-
-    <div class="linha">
-        <span class="rotulo">E-mail</span>
-        {{ usuario.email|default:"Não informado" }}
-    </div>
-
-    <div class="linha">
-        <span class="rotulo">CPF</span>
-        {{ usuario.cpf|default:"Não informado" }}
-    </div>
-    <a href="{% url 'usuario_listar' %}">Voltar</a>
-</div>
 

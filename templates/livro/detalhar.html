@@ -1,26 +1,5 @@
-<div class="card">
-    <h1>Detalhes do Livro</h1>
-
-    <div class="linha">
+{% extends "base.html" %}
+{% block title %}Livro{% endblock %}
+{% block content %}<div class="app-heading"><span class="title">DETALHES DO LIVRO</span><h1>{{ livro.titulo|default:"Livro" }}</h1></div><div class="app-panel"><ul class="detail-list"><li><strong>Editora</strong>{{ livro.editora|default:"Não informado" }}</li><li><strong>Descrição</strong>{{ livro.descricao|default:"Não informado" }}</li><li><strong>Categorias</strong>{{ livro.categoria.all|join:", "|default:"Não informado" }}</li></ul><a href="{% url 'livro_listar' %}" class="btn btn-outline-dark mt-4">Voltar</a></div>{% endblock %}
         <span class="rotulo">Livro: </span>
-        {{ livro.titulo|default:"Não informado" }}
-    </div>
-
-    <div class="linha">
-        <span class="rotulo">Editora: </span>
-        {{ livro.editora|default:"Não informado" }}
-    </div>
-
-    <div class="linha">
-        <span class="rotulo">Descrição: </span>
-        {{ livro.descricao|default:"Não informado" }}
-    </div>
-
-    <div class="linha">
-        <span class="rotulo">Categorias:</span>
-        {{ livro.categoria.all|join:", "|default:"Não informado" }}
-    </div>
-    <a href="{% url 'livro_listar' %}">Voltar</a>
-    
-</div>
 
