@@ -1,9 +1,4 @@
-<p align="center">
-  <a href="https://github.com/maryvitoria002/livraura" target="_blank">
-    <!-- Substitua pelo caminho real do logo no seu repo -->
-    <img src="" width="400" alt="livraura Logo">
-  </a>
-</p>
+
 
 <p align="center">
   <a href="https://github.com/maryvitoria002/livraura/releases">
@@ -23,11 +18,6 @@
 
 <p align="center">
   <em>O Sistema Livraura</em> é uma plataforma criada para facilitar a organização e o uso da biblioteca da escola. Nele, alunos podem consultar livros para solicitar os empréstimos (empréstimos estes que devem ser feitos pessoalmente)  e renovar seus empréstimos, enquanto bibliotecários cuidam da organização dos livros, empréstimos, devoluções e demais atividades da biblioteca.
-</p>
-
-<p align="center">
-  <!-- Substitua pelo seu screenshot -->
-  <img src="" alt="livraura Screenshot">
 </p>
 
 ---
